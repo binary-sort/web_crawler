@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/local/Dockerfile
+    image: web_crawler_local
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    command: /start
