@@ -38,12 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_swagger'
+    'rest_framework_swagger',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -121,6 +123,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Parser classes to help swagger, default ll be JSONParser only.
+REST_FRAMEWORK = {
+    # Parser classes priority-wise for Swagger
+    'DEFAULT_MODEL_SERIALIZER_CLASS': (
+        'rest_framework.serializers.Serializer',
+    ),
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ],
+}
+
 
 # Swagger Settings
 
@@ -128,3 +143,6 @@ SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,
     'SECURITY_DEFINITIONS': {}
 }
+
+# CORS settings
+CORS_ORIGIN_ALLOW_ALL = True
