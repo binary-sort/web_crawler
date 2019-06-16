@@ -14,14 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from rest_framework_swagger.views import get_swagger_view
 from . import views
+from crawler import views as crawler_views
 
 schema_view = get_swagger_view(title='Webcrawler API')
 
 urlpatterns = [
     path('', schema_view),
     path('hello-world', views.hello_world),
+    path('parse-url', crawler_views.parse_url),
     path('admin/', admin.site.urls),
 ]
