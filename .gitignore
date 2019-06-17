@@ -16,3 +16,4 @@ ENV/
 .env
 .envs/*
 !.envs/.local/
+staticfiles/
